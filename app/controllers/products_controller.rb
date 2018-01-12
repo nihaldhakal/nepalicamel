@@ -4,11 +4,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = current_user.products
   end
 
   # GET /products/1
-  # GET /products/1.json
+  # GET /params[:]products/1.json
   def show
   end
 
