@@ -1,4 +1,4 @@
-<%=image_tag @product.image.url(:medium)%>
+<%=image_tag @product.image_url %>
 
 <p>
   <strong>Name:</strong>
@@ -15,5 +15,12 @@
   <%= @product.image_url %>
 </p>
 
+<p>
+  <strong>Price History:</strong>
+  <% @product.pricehistories.each do |price_history| %>
+    <%= "#{price_history.date} #{price_history.price}" %>
+    <br>
+  <% end %>
+</p>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
