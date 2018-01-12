@@ -7,7 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Url</th>
-      <th>Image url</th>
+      <th>Image</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,10 +15,9 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%=image_tag product.image.url(:medium)%></td>
         <td><%= product.name %></td>
         <td><%= product.url %></td>
-        <td><%= product.image_url %></td>
+        <td><%=image_tag product.image_url %></td>
         <td><%= link_to 'Show', product %></td>
         <td><%= link_to 'Edit', edit_product_path(product) %></td>
         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
