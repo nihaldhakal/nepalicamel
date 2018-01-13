@@ -24,5 +24,20 @@
 																		user_id: user.id
 																})
 			end
-		end
+    end
+
+    Product.all.each do |product|
+      (1..rand(5..10)).each do |counter_x|
+        reference_date = 10.days.ago
+        (1..counter_x).each do |counter_y|
+          date = reference_date + counter_y
+					new_pricehistory = Pricehistory.new
+          new_pricehistory.date = date
+          new_pricehistory.price = counter_y + counter_y * rand(1..10) / 100.0
+          new_pricehistory.product_id = product.id
+          new_pricehistory.save!
+
+        end
+      end
+    end
 
