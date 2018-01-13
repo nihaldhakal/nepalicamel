@@ -15,12 +15,29 @@
   <%= @product.image_url %>
 </p>
 
-<p>
-  <strong>Price History:</strong>
-  <% @product.pricehistories.each do |price_history| %>
-    <%= "#{price_history.date} #{price_history.price}" %>
-    <br>
-  <% end %>
-</p>
+<canvas id="myChart" width="200" height="200"> </canvas>
+<script>
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["Red", "Red"],
+            datasets: [{
+                label: '# of Votes',
+                data: [12,3,10,4,40],
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
