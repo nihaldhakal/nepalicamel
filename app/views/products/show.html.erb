@@ -1,19 +1,24 @@
-<%=image_tag @product.image_url %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+<div class="row">
+  <div class="col-sm-6">
+    <p>
+      <strong>Name:</strong>
+      <%= @product.name %>
+    </p>
+    <p>
+      <strong>Url:</strong>
+      <%= @product.url %>
+    </p>
+  </div>
+  <div class="col-sm-6">
+    <p>
+      <strong>Image url:</strong>
+      <%= @product.image_url %>
+    </p>
+    <%=image_tag @product.image_url %>
+  </div>
+</div>
 
-<p>
-  <strong>Url:</strong>
-  <%= @product.url %>
-</p>
-
-<p>
-  <strong>Image url:</strong>
-  <%= @product.image_url %>
-</p>
 
 <canvas id="myChart" width="200" height="200"> </canvas>
 <script>
