@@ -10,8 +10,13 @@
       <%= link_to "Your Products", root_path, class: "navbar-brand" %>
     </div>
     <div class="nav navbar-nav navbar-right">
-        <li><%= link_to "Sign In", new_user_session_path, class: "active" %></li>
+      <% if user_signed_in? %>
+        <li><%= link_to "Logged in as #{current_user.email}", root_path,  class: "active" %></li>
+        <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to("Sign In", new_user_session_path, class: "active")%></li>
         <li><%= link_to "Sign Up", new_user_registration_path, class: "active" %></li>
+      <% end %>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </header>
