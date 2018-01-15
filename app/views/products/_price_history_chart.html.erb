@@ -1,0 +1,95 @@
+<canvas id="myChart"> </canvas>
+
+<div class="clearfix">
+  Chart type
+  <select id="type">
+    <option value="line">line</option>
+    <option value="bar">bar</option>
+  </select>
+  <input type="button" id="update" value="Update"/>
+</div>
+
+
+<script>
+  function randomNumber(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function randomBar(date, lastClose) {
+    var open = randomNumber(lastClose * .95, lastClose * 1.05);
+    var close = randomNumber(open * .95, open * 1.05);
+    return {
+      t: date.valueOf(),
+      y: close
+    };
+  }
+
+
+  var dateFormat = 'MMMM DD YYYY';
+  var date = moment('April 01 2017', dateFormat);
+  var data = [randomBar(date, 30)];
+  var labels = [date];
+  // while (data.length < 60) {
+  //   date = date.clone().add(1, 'd');
+  //   if (date.isoWeekday() <= 6) {
+  //     data.push(randomBar(date, data[data.length - 1].y));
+  //     labels.push(date);
+  //   }
+  // }
+
+  for (var i = 1; i <= 5; i++) {
+    var date = date.clone().add(1, 'd');
+    data.push(
+      {
+        t: date.clone().valueOf(),
+        y: randomNumber(30,10)
+      }
+    );
+    labels.push(date);
+  }
+
+
+  var ctx = document.getElementById("myChart").getContext("2d");
+  ctx.canvas.width = 1000;
+  ctx.canvas.height = 300;
+  var cfg = {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Price history",
+        data: data,
+        type: 'line',
+        pointRadius: 0,
+        fill: false,
+        lineTension: 0,
+        borderWidth: 2
+      }]
+    },
+    options: {
+      scales: {
+        xAxes: [{
+          type: 'time',
+          distribution: 'series',
+          ticks: {
+            source: 'labels'
+          }
+        }],
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Price (NRs)'
+          }
+        }]
+      }
+    }
+  };
+  var chart = new Chart(ctx, cfg);
+
+  document.getElementById('update').addEventListener('click', function() {
+    var type = document.getElementById('type').value;
+    chart.config.data.datasets[0].type = type;
+    chart.update();
+  });
+
+</script>

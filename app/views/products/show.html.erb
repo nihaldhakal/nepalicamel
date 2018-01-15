@@ -16,34 +16,16 @@
     </p>
   </div>
   <div class="col-sm-6">
+    <p>
+      <strong>Image url:</strong>
+      <%= @product.image_url %>
+    </p>
     <%= image_tag @product.image_url, size: 200, class: 'pull-right product-image' %>
   </div>
 </div>
 
 <hr>
 
-<canvas id="myChart" width="200" height="200"> </canvas>
-<script>
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ["Red", "Red"],
-            datasets: [{
-                label: '# of Votes',
-                data: [12,3,10,4,40],
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
-            }
-        }
-    });
-</script>
+<%= render "price_history_chart"  %>
 
 <%= link_to 'Back', products_path %>
