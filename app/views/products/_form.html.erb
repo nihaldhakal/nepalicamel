@@ -1,29 +1,18 @@
 <%= form_for product, html: { multipart: true }  do |f| %>
   <% if product.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% url_empty_error_message = product.errors.select{|k,v| k == :url }.join(" ").titleize %>
+      <% if url_empty_error_message.present? %>
+        <%= url_empty_error_message %>
+      <% else %>
+        The provided url doesn't look like a valid SastoDetal product URL. Please re-enter!
       <% end %>
-      </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
     <%= f.label :url %>
-    <%= f.text_field :url %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :image_url %>
-    <%= f.text_field :image_url %>
+    <%= f.text_field :url, size: 100 %>
   </div>
 
   <div class="actions">

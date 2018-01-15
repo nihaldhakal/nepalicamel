@@ -15,10 +15,10 @@
 
   <tbody>
     <% @products.each do |product| %>
-      <tr>
+      <tr style="min-height: 60px">
         <td><%= product.name %></td>
         <td><%= product.url %></td>
-        <td><%=image_tag product.image_url %></td>
+        <td><%=image_tag product.image_url || "", size:60 %></td>
         <td><%= link_to 'Price history', product %></td>
         <td><%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
