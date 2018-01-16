@@ -22,4 +22,7 @@ module Clockwork
   every(1.day, 'scrape.scheduler', at: '00:00') do
     ScrapeScheduler.run!
   end
+  # every(10.seconds, 'scrape.scheduler') do
+  #   ScrapeScheduler.run!
+  # end
 end

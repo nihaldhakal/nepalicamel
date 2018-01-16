@@ -27,7 +27,6 @@ class ProductsController < ApplicationController
     @product = current_user.products.new(product_params)
 
     respond_to do |format|
-      @product.save!
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
