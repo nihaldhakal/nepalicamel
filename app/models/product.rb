@@ -18,7 +18,6 @@ class Product < ApplicationRecord
   end
 
   def do_initial_scrape
-    debugger
     self.name = scrapped_attrs[:name]
     self.image_url = scrapped_attrs[:image_url]
   end
