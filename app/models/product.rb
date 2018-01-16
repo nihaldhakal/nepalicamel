@@ -7,14 +7,29 @@ class Product < ApplicationRecord
   attr_accessor :scrapped_attrs
 
   before_validation :do_initial_scrape
-  after_create :update_price_history
+  after_create :mimic_past_month_price_history_based_on_current_price
 
   def scrapped_attrs
     @scrapped_attrs ||= Scrapper.new(url).attributes
   end
 
-  def update_price_history
-    self.pricehistories.create!(date: Time.current, price: scrapped_attrs[:price])
+  def mimic_past_month_price_history_based_on_current_price
+    current_date = Time.current.to_date
+    current_price = scrapped_attrs[:price].to_i
+
+    days_to_add = 30
+    from_date = current_date - days_to_add
+    to_date = current_date - 1
+    date_range = from_date..to_date
+
+    date_range.each do |date|
+      random_deviation = 1 + rand(-5..5) / 100.0
+      random_price = current_price * random_deviation
+      self.pricehistories.create!(date: date, price: random_price.to_i)
+    end
+
+    # Update current price at last to maintain sequential order
+    self.pricehistories.create!(date: current_date, price: current_price)
   end
 
   def do_initial_scrape
