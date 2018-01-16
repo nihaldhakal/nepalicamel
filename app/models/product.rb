@@ -29,7 +29,13 @@ class Product < ApplicationRecord
     end
 
     # Update current price at last to maintain sequential order
-    self.pricehistories.create!(date: current_date, price: current_price)
+    create_price_history_today
+  end
+
+  def create_price_history_today
+    # Don't update if already updated
+    return if self.pricehistories.select{|ph| ph.date == Time.current.to_date}.present?
+    self.pricehistories.create!(date: Time.current.to_date, price: scrapped_attrs[:price].to_i)
   end
 
   def do_initial_scrape
