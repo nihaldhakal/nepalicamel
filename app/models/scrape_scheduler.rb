@@ -12,7 +12,9 @@ class ScrapeScheduler
 
   def run!
     Rails.logger.debug "Running ScrapeScheduler for time(#{@time}) at #{Time.current}"
-    Product.last.create_price_history_today
+    Product.all.each do |product|
+      product.create_price_history_for_today
+    end
     # interval = 15.minutes
     # interval_utc_floor = Time.zone.at((self.time.to_f / interval).floor * interval)
     # users = User.where("date_part('hour', send_time) = ? AND date_part('minute', send_time) = ?", interval_utc_floor.hour, interval_utc_floor.min)
