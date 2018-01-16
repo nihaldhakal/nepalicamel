@@ -18,5 +18,8 @@ module Clockwork
   # every(1.day, 'midnight.job', :at => '00:00')
   #
   # every(15.minutes, 'calendar.scheduler', at: ['**:00', '**:15', '**:30', '**:45'], tz: 'UTC') { CalendarScheduler.run! }
-  every(10.seconds, 'scrape.scheduler') { ScrapeScheduler.run! }
+
+  every(1.day, 'scrape.scheduler', at: '00:00') do
+    ScrapeScheduler.run!
+  end
 end
