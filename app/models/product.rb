@@ -43,4 +43,8 @@ class Product < ApplicationRecord
     self.image_url = scrapped_attrs[:image_url]
   end
 
+  def mimic_notify_price
+    PriceNotifierMailer.notify_price(self.user, self, self.pricehistories.last.price)
+  end
+
 end

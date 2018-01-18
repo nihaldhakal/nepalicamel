@@ -26,6 +26,25 @@
 
 <hr>
 
+<%= form_for @product, method: 'patch', html: { multipart: true }  do |f| %>
+  <h4>Notification</h4>
+
+  <div class="field">
+    Notify me by email when the price drops to
+    <%= f.number_field :notification_threshold, { min: 0, style: "width: 80px"} %>
+  </div>
+
+  <div class="row">
+  </div>
+
+  <div class="actions">
+    <% save_or_update = @product.notification_threshold.present? ? "Update" : "Save" %>
+    <%= f.submit save_or_update %>
+  </div>
+<% end %>
+
+<hr>
+
 <%= render "price_history_chart"  %>
 
 <%= link_to 'Back', products_path, class: "btn btn-default" %>

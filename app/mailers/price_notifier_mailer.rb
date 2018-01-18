@@ -1,6 +1,11 @@
 class PriceNotifierMailer < ApplicationMailer
-  def notify_price(user, product)
-    @text = "Hello there!"
-    mail(to: user.email, subject: test_subject)
+  def notify_price(user, product, price)
+    @user = user
+    @product = product
+    @price = price
+    mail(
+      to: user.email,
+      subject: "Product price dropped below threshold | (#{@product.name})"
+    ).deliver_now
   end
 end

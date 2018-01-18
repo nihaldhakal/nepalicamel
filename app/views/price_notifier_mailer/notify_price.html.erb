@@ -1,1 +1,16 @@
-There you do <%= @text %>
+Hi <%= @user.email %>,
+
+<h1> Price Threshold Notification</h1>
+
+A product in your watch list just dropped the threshold you had set. See below for more information.
+
+Name: <%= @product.name %>
+Url: <%= @product.url %>
+Notification Threshold: <%= @product.notification_threshold %>
+Latest Price: <%= @price %>
+
+Thanks for using our service.
+
+Greetings,
+
+NepaliCamel.
