@@ -6,6 +6,6 @@ class PriceNotifierMailer < ApplicationMailer
     mail(
       to: user.email,
       subject: "Product price dropped below threshold | (#{@product.name})"
-    ).deliver_now
+    )
   end
 end

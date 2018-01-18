@@ -44,7 +44,7 @@ class Product < ApplicationRecord
   end
 
   def mimic_notify_price
-    PriceNotifierMailer.notify_price(self.user, self, self.pricehistories.last.price)
+    PriceNotifierMailer.notify_price(self.user, self, self.pricehistories.last.price).deliver_now
   end
 
 end

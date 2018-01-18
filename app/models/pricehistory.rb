@@ -7,7 +7,7 @@ class Pricehistory < ApplicationRecord
 
   def notify_user_if_needed
     return unless self.product.notification_threshold.present?
-    PriceNotifierMailer.notify_price(self.product.user, self.product, self.price)
+    PriceNotifierMailer.notify_price(self.product.user, self.product, self.price).deliver_now
   end
 
 end

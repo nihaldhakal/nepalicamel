@@ -1,16 +1,39 @@
-Hi <%= @user.email %>,
+<h2> Price Went Below Notification Threshold</h2>
 
-<h1> Price Threshold Notification</h1>
+<h3>Hi <%= @user.email %>,</h3>
 
-A product in your watch list just dropped the threshold you had set. See below for more information.
 
-Name: <%= @product.name %>
-Url: <%= @product.url %>
-Notification Threshold: <%= @product.notification_threshold %>
-Latest Price: <%= @price %>
+<p>
+  A product in your watch list just dropped the threshold you had set. See below for more information.
+</p>
 
-Thanks for using our service.
+<div style="padding-left: 40px">
+  <table style="border: solid 1px">
+    <tr>
+      <td>Name</td>
+      <td><%= @product.name %></td>
+    </tr>
+    <tr>
+      <td>Url</td>
+      <td><a href="<%= @product.url %>"><%= @product.url %></a></td>
+    </tr>
+    <tr>
+      <td>Notification Threshold</td>
+      <td><%= @product.notification_threshold %></td>
+    </tr>
+    <tr>
+      <td>Latest Price</td>
+      <td><%= @price %></td>
+    </tr>
+  </table>
+</div>
 
+<p>
+  Thanks for using our service.
+</p>
+
+<br>
 Greetings,
-
-NepaliCamel.
+<br>
+<br>
+<h4>NepaliCamel.com</h4>
