@@ -33,4 +33,5 @@ class Scrapper
     }
   end
 end
+#prodDetail.productBigImage a
 
